@@ -1,0 +1,20 @@
+{{ template "base" . }}
+<body>
+<div class="container">
+    {{template "header" . }}
+    <div class="main-section">
+        <div class="forum-section">
+            <div class="errors">
+                <div class="error-code">
+                    <h1>{{.Code}}</h1>
+                </div>
+                <div class="error-text">
+                    <p>{{.Text}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{template "auth"}}
+</body>
+{{ template "footer" . }}

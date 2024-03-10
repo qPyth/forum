@@ -1,0 +1,58 @@
+{{define "auth"}}
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="form-title">
+                <span class="close-btn" id="closeLoginModal">&times;</span>
+                <p style="text-align: center">Sign In</p>
+            </div>
+            <form id="signin-form">
+                <div class="form-inputs">
+                    <div class="form-input">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Your email" name="email" id="email" required>
+                    </div>
+                    <div class="form-input">
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Your password" name="password" id="password" required>
+                    </div>
+                    <button id="login-submit" class="submit-btn" type="submit">Sign In</button>
+                    <div class="error" id="error-signin"></div>
+                </div>
+            </form>
+            <div class="form-footer">
+                <span >Not account? </span>
+                <a class="link-line" id="registerBtn">Registration</a>
+            </div>
+        </div>
+    </div>
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="form-title">
+                <span class="close-btn" id="closeRegisterModal">&times;</span>
+                <p style="text-align: center">Sign Up</p>
+            </div>
+            <form id="signup-form">
+                <div class="form-inputs">
+                    <div class="form-input">
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" placeholder="Your username" name="username" required>
+                    </div>
+                    <div class="form-input">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Your email" name="email" required>
+                    </div>
+                    <div class="form-input">
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Your password" name="password" required>
+                    </div>
+                    <div class="form-input">
+                        <label for="password-check"><b>Confirm password</b></label>
+                        <input type="password" placeholder="confirm password" name="password_confirm" required>
+                    </div>
+                    <button id="signup-submit" class="submit-btn" type="submit">Sign Up</button>
+                    <div class="error" id="error-signup"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+{{end}}

@@ -1,0 +1,36 @@
+{{ template "base" . }}
+<body>
+    <div class="container">
+        {{template "header" .}}
+        <div class="main-section">
+            <div class="forum-create-post">
+                <h2>Create post</h2>
+                <div class="create-post-form">
+                    <form action="/sub-forum/create-post?category={{.CategoryURL}}" method="post" enctype="multipart/form-data">
+                        <div class="form-input">
+                            <input type="text" id="postTitle" name="title" placeholder="Post title..." class="form-input-title" maxlength="70" required><br>
+                            <div class="tags">
+                                {{range .Tags}}
+                                <div class="checkboxItem">
+                                    <input type="checkbox" id="checkbox1" name="tag" value="{{.ID}}">
+                                    <label for="checkbox1">{{.Name}}</label>
+                                </div>
+                                {{end}}
+                            </div>
+                            <textarea id="postContent" name="content" rows="10" placeholder="Post content..." maxlength="500" required></textarea><br>
+                        </div>
+                        <div class="form-submit">
+                            <div class="file-input-wrapper">
+                                <input type="file" id="imageUpload" name="image" accept="image/*">
+                            </div>
+                            <button class="create-post-button" type="submit">Create post</button>
+                        </div>
+                        <div class="error-post">
+                            <p>{{.ErrorText}}</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

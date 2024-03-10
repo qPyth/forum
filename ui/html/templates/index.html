@@ -1,0 +1,51 @@
+{{ template "base" . }}
+<body>
+<div class="container">
+    {{template "header" . }}
+    <div class="main-section">
+        <div class="forum-section">
+            <div class="forum-title">
+                <img src="/static/images/disc.png" alt="disc">
+                <h1>DOTA2 Forum</h1>
+            </div>
+            <div class="forum-content">
+                <table class="categories">
+                    <thead>
+                        <tr>
+                            <th class="col1"></th>
+                            <th class="col2-3">Threads</th>
+                            <th class="col2-3">Last</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range .Categories.Categories }}
+                        <tr>
+                            <td class="col1">
+                                <a href="/sub-forum/{{.Url}}">{{.Title}}</a>
+                                <p class="categories-desc">{{.Description}}</p>
+                            </td>
+                            <td class="col2">{{.PostsCount}}</td>
+                            <td class="col2">
+                                <div class="latest-post">
+                                    {{ if .LatestPost}}
+                                        {{ if .LatestPost.Author}}
+                                            <p>{{.LatestPost.Title}}</p>
+                                            <p>by {{.LatestPost.Author}}</p>
+                                        {{ end }}
+                                        {{ if ne .LatestPost.CreatedDate.IsZero true}}
+                                            <p>{{.LatestPost.CreatedDate.Format "2006 Jan 02"}}</p>
+                                        {{ end }}
+                                    {{ end }}
+                                </div>
+                            </td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{{template "auth"}}
+</body>
+{{ template "footer" . }}

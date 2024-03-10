@@ -1,0 +1,5 @@
+pkg/storage/storage.db
+.idea
+.vscode
+.env
+ui/static/images/post_images/*

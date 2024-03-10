@@ -1,0 +1,73 @@
+{{template "base" .}}
+<body>
+    <div class="container">
+        {{template "header" . }}
+        <div class="main-section">
+            <div class="forum-section">
+                <div class="topic-title">
+                    <div class="forum-title-left">
+                        <img src="/static/images/disc.png" alt="disc">
+                        <h1>{{.Posts.Category.Name}}</h1>
+                    </div>
+                    <div class="forum-title-right">
+                        {{if .User}}
+                            <a class="create-post-button" href="/sub-forum/create-post?category={{.Posts.Category.Url}}">Create post</a>
+                        {{end}}
+                    </div>
+                </div>
+                <form class="filter" method="get" action="/sub-forum/{{.Posts.Category.Url}}">
+                    <div class="tags">
+                        {{range .Tags}}
+                        <div class="checkboxItem">
+                            <input type="checkbox" id="checkbox1" name="tag" value="{{.ID}}">
+                            <label for="checkbox1">{{.Name}}</label>
+                        </div>
+                        {{end}}
+                    </div>
+                    <button class="sign-in-button" type="submit">Filter</button>
+                    <a href="/sub-forum/{{.Posts.Category.Url}}" class="sign-in-button">Reset</a>
+                </form>
+                <div class="forum-posts">
+                    {{if .Posts.Posts }}
+                    <table class="posts">
+                        <thead>
+                            <tr>
+                                <th class="col60">Title</th>
+                                <th class="col20">Author</th>
+                                <th class="col20">Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{ range .Posts.Posts }}
+                        <tr>
+                            <td class="col60">
+                                <a href="/post?post_id={{.ID}}">{{.Title}}</a>
+                                <div class="tags" style="margin-top: 5px">
+                                    {{range index $.Posts.Tags .ID}}
+                                    <p style="font-size: 12px">#{{.}}</p>
+                                    {{end}}
+                                </div>
+                            </td>
+                            <td class="col20">
+                                <div class="column">
+                                    <p style="color: #8e4a49">{{index $.Posts.Authors .ID}}</p>
+                                    <p style="font-size: 12px">{{.CreatedDate.Format "2006 Jan 02\n15:04"}}</p>
+                                </div>
+                            </td>
+                            <td class="col20">
+                                    <img src="/static/images/comment.png" height="15" width="15" style="vertical-align: middle"/>
+                                    <span style="vertical-align: middle">{{index $.Posts.CommentsCount .ID}}</span>
+                            </td>
+                        </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                    {{else}}
+                    <h1 style="font-size: 25px;padding: 10px">There are no posts in this section yet, be the first!</h1>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "auth" .}}
+</body>

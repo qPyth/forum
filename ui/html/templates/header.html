@@ -1,0 +1,24 @@
+{{define "header"}}
+<div class="header">
+    <a href="/">
+        <div class="header-logo">
+            <img src="/static/images/dota-2.png" alt="dotka2" class="logo-image">
+            <h3 class="logo-text">DOTA 2</h3>
+        </div>
+    </a>
+    <div class="header-login">
+        {{if .User}}
+            <a id="user-profile-button" class="user-profile">{{.User.Username}}</a>
+            <div class="profile-modal" id="profile-modal">
+                <div class="list">
+                    <a href="/profile/created-posts">Created posts</a>
+                    <a href="/profile/voted-posts">Voted posts</a>
+                    <a href="/sign-out">Log out</a>
+                </div>
+            </div>
+        {{else}}
+        <button id="signin-button" class="sign-in-button">SIGN IN</button>
+        {{end}}
+    </div>
+</div>
+{{end}}

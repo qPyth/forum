@@ -1,0 +1,66 @@
+{{template "base" .}}
+<body>
+<div class="container">
+    {{template "header" .}}
+    <div class="main">
+        <div class="post-section" data-id="{{.Post.Post.ID}}">
+            <div class="post-title">
+                <h2>{{.Post.Post.Title}}</h2>
+                <div class="post-info">
+                    <p>{{.Post.Author}}</p>
+                    <p class="date">{{.Post.Post.CreatedDate.Format "2006 Jan 02, 15:04"}}</p>
+                </div>
+                <div class="tags">
+                    {{range .Post.Tags}}
+                    <p style="font-size: 14px">#{{.}}</p>
+
+                    {{end}}
+                </div>
+            </div>
+            {{if not (eq .Post.Post.Image "")}}
+            <div class="post-image">
+                <img src="{{.Post.Post.Image}}" alt="{{.Post.Post.Image}}">
+            </div>
+            {{end}}
+            <div class="post-content">
+                {{.Post.Post.Content}}
+            </div>
+            <div class="like-outer">
+                <i class="far fa-thumbs-up like"></i> <span class="likeCount">{{.Post.Post.LikeCount}}</span>
+                <i class="far fa-thumbs-down dislike"></i> <span class="dislikeCount">{{.Post.Post.DislikeCount}}</span>
+            </div>
+        </div>
+        {{if .Post.Comments}}
+        <div class="comment-section">
+            <div class="line"></div>
+            {{range .Post.Comments}}
+            <div class="comment" data-id="{{.ID}}">
+                <div class="comment-title">
+                    <p>{{index $.Post.Authors .ID}}</p>
+                    <p class="date">{{.CreatedDate.Format "2006 Jan 02, 15:04"}}</p>
+                </div>
+                <p style="overflow: auto; word-wrap: break-word">{{.Content}}</p>
+                <div class="like-outer">
+                    <i class="far fa-thumbs-up like"></i> <span class="likeCount">{{.LikeCount}}</span>
+                    <i class="far fa-thumbs-down dislike"></i> <span class="dislikeCount">{{.DislikeCount}}</span>
+                </div>
+            </div>
+            <div class="line"></div>
+            {{end}}
+        </div>
+        {{else}}
+        <div class="line"></div>
+        <p>There are no comments in this post yet, be the first!</p>
+        {{end}}
+        {{if .User}}
+        <div class="comment-input">
+            <form action="/sub-forum/create-comment?post_id={{.Post.Post.ID}}" class="form" method="post">
+                <textarea id="comments" name="comments" rows="4" placeholder="Add comment ..." maxlength="300"></textarea>
+                <button class="create-post-button" type="submit">Add comment</button>
+            </form>
+        </div>
+        {{end}}
+    </div>
+</div>
+{{template "auth" .}}
+</body>

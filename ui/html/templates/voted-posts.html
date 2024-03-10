@@ -1,0 +1,42 @@
+{{template "base" .}}
+<body>
+    <div class="container">
+        {{template "header" .}}
+        <div class="main">
+            <div class="forum-section">
+                <div class="topic-title" style="padding: 10px 0">
+                    <h1>Voted posts</h1>
+                </div>
+                <div class="created-post">
+                    {{if .Posts }}
+                    <table class="posts">
+                        <thead>
+                        <tr>
+                            <th class="col60">Title</th>
+                            <th class="col20">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{ range .Posts }}
+                        <tr>
+                            <td class="col60">
+                                <a href="/post?category={{index $.Categories .CategoryID}}&post_id={{.ID}}">{{.Title}}</a>
+                            </td>
+                            <td class="col20">
+                                <div class="column">
+                                    <p style="font-size: 12px">{{.CreatedDate.Format "2006 Jan 02\n15:04"}}</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                    {{else}}
+                    <h1 style="font-size: 25px;padding: 10px">You haven't created any posts yet</h1>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "auth" .}}
+</body>
